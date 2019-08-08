@@ -7,9 +7,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,7 +61,9 @@ public class NikonSearch {
 
     @When("^User sorts result from highest price to slowest$")
     public void user_sorts_result_from_highest_price_to_slowest() {
-        driver.findElement(By.xpath("//*[@id=\"a-autoid-0-announce\"]")).click();
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"a-autoid-0-announce\"]")));
+        element.click();
         driver.findElement(By.xpath("//*[@id=\"s-result-sort-select_2\"]")).click();
     }
 
